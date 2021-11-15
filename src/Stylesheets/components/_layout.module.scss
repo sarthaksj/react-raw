@@ -1,0 +1,86 @@
+@use "../abstracts/mixins" as *;
+@use "../abstracts/variables" as *;
+
+$sidebar-min-height: 40px;
+$sidebar-height: 45px;
+$sidebar-max-height: 50px;
+
+$sidebar-min-width: 200px;
+$sidebar-width: 275px;
+
+$header-min-height: 40px;
+$header-height: 50px;
+
+$header-bgclr: $primary-color;
+$main-bgclr: $primary-color;
+$sidebar-bgclr: $primary-color;
+$combined-boxshadow: 0px 2px 4px -1px rgb(0 0 0 / 20%),
+      0px 4px 5px 0px rgb(0 0 0 / 14%), 0px 1px 10px 0px rgb(0 0 0 / 12%);
+
+// $sidebar-max-width: map-get($dimensions, sidebar, max-width);
+
+.sub_layout {
+      display: flex;
+      @include media-query(small) {
+      }
+}
+
+.Header {
+      position: fixed;
+      top: 0;
+      right: 0;
+      left: 0;
+      z-index: 100;
+      min-height: $header-min-height;
+      height: $header-height;
+      background: $header-bgclr;
+      box-shadow: $combined-boxshadow;
+      border-image: linear-gradient(139deg, #64dd17, #ff4b01, #c12127, #6200ea)
+            3;
+      border-width: 10px 0 0;
+      border-top-style: solid;
+
+      @include media-query(small) {
+      }
+}
+
+.Sidebar {
+      position: fixed;
+      background: $sidebar-bgclr;
+      height: 100%;
+      min-width: $sidebar-min-width;
+      z-index: 99;
+      box-shadow: $combined-boxshadow;
+
+      &__left {
+            @extend .Sidebar;
+            left: 0;
+
+            @include media-query(small) {
+                  right: 0;
+                  bottom: 0;
+                  min-height: $sidebar-min-height;
+                  max-height: $sidebar-max-height;
+            }
+      }
+
+      // &__right {
+      //       @extend .Sidebar;
+      //       right: 0;
+
+      //       @include media-query(medium) {
+      //             display: none;
+      //       }
+      // }
+}
+
+.Main {
+      background: $main-bgclr;
+      color: white;
+      // @include media-query(small) {
+      // margin-bottom: $sidebar-height;
+      // }
+}
+
+// .Footer {
+// }

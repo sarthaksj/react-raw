@@ -1,0 +1,76 @@
+@use "../../../Stylesheets/abstracts/mixins" as *;
+
+$sidebar-min-height: 40px;
+$sidebar-height: 45px;
+$sidebar-max-height: 50px;
+
+$sidebar-min-width: 200px;
+$sidebar-width: 275px;
+
+$header-min-height: 40px;
+$header-height: 50px;
+
+$header-bgclr: hsl(156, 7%, 14%);
+$main-bgclr: hsl(199, 53%, 79%);
+$sidebar-bgclr: hsl(40, 89%, 61%);
+
+// $sidebar-max-width: map-get($dimensions, sidebar, max-width);
+
+.sub-layout {
+      display: flex;
+      @include media-query(small) {
+      }
+}
+
+.Header {
+      position: fixed;
+      top: 0;
+      right: 0;
+      left: 0;
+      z-index: 100;
+      min-height: $header-min-height;
+      height: $header-height;
+      background: $header-bgclr;
+
+      @include media-query(small) {
+      }
+}
+
+.Sidebar {
+      position: fixed;
+      background: $sidebar-bgclr;
+      height: 100%;
+      min-width: $sidebar-min-width;
+      z-index: 99;
+
+      &__left {
+            @extend .Sidebar;
+            left: 0;
+
+            @include media-query(small) {
+                  right: 0;
+                  bottom: 0;
+                  min-height: $sidebar-min-height;
+                  max-height: $sidebar-max-height;
+            }
+      }
+
+      // &__right {
+      //       @extend .Sidebar;
+      //       right: 0;
+
+      //       @include media-query(medium) {
+      //             display: none;
+      //       }
+      // }
+}
+
+.Main {
+      background: $main-bgclr;
+      // @include media-query(small) {
+      // margin-bottom: $sidebar-height;
+      // }
+}
+
+// .Footer {
+// }

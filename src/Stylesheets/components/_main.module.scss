@@ -1,0 +1,32 @@
+.Main {
+      display: grid;
+      grid-template-rows: auto;
+      gap: 50px;
+      padding: 2rem 5rem;
+}
+
+.heading {
+      h1,
+      p {
+            text-align: center;
+      }
+      p {
+            font-size: 1.4rem;
+      }
+
+      h1 {
+            font-size: 3.75rem;
+            font-weight: 300;
+      }
+
+      width: 70%;
+      margin: auto;
+}
+
+.description {
+      p {
+            text-align: justify;
+            margin-top: 10px;
+            font-size: 1.1rem;
+      }
+}

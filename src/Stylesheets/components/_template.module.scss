@@ -1,0 +1,35 @@
+.Main {
+      font-family: "Lato", sans-serif;
+      display: flex;
+
+      &__container {
+            padding: 3rem 8rem;
+            margin: auto;
+            width: 90%;
+      }
+}
+
+.Description {
+      margin-bottom: 30px;
+
+      &__componentName {
+            font-size: 50px;
+            color: #32de84;
+            margin-bottom: 16px;
+      }
+
+      &__componentDescription {
+            font-size: 1.1rem;
+      }
+}
+
+.Tutorial {
+      display: grid;
+      grid-template-columns: auto;
+      gap: 40px;
+
+      &__heading {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+      }
+}

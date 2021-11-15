@@ -1,0 +1,28 @@
+@use "../abstracts/variables" as *;
+
+.header {
+      &__wrapper {
+            display: flex;
+            justify-content: space-between;
+            padding: 0px 15px;
+            height: 100%;
+      }
+      &__left,
+      &__middle,
+      &__right {
+            display: flex;
+            align-items: center;
+      }
+
+      &__heading {
+            color: hsl(0, 0%, 100%);
+            font-size: 1.25rem;
+      }
+
+      &__right {
+            i {
+                  color: white;
+                  font-size: 30px;
+            }
+      }
+}

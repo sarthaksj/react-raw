@@ -1,0 +1,25 @@
+$breakpoints: (
+      small: 40em,
+      //640px
+      medium: 65em,
+      //1040
+);
+
+@mixin media-query($key) {
+      $size: map-get($breakpoints, $key);
+      @media only screen and (max-width: $size) {
+            @content;
+      }
+}
+
+@mixin media-query-min($key) {
+      $size: map-get($breakpoints, $key);
+      @media only screen and (min-width: $size) {
+            @content;
+      }
+}
+
+@mixin flex($direction: row) {
+      display: flex;
+      flex-direction: row;
+}

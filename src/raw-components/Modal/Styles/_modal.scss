@@ -1,0 +1,60 @@
+$modal-maxHeight: 85vh;
+$small: 40em;
+$backdrop-bgclr: hsla(0, 0%, 96%, 0.502);
+
+.Modal {
+      position: fixed;
+      display: grid;
+      grid-template-rows: auto;
+      background-color: white;
+      z-index: 600;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 350px;
+      transition: all 0.3s ease-out;
+      padding: 1.5rem 0.5rem;
+      box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+            rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+      max-height: $modal-maxHeight;
+      overflow-y: scroll;
+
+      &::-webkit-scrollbar {
+            display: none;
+      }
+
+      &-Header {
+      }
+
+      &-Body {
+      }
+
+      &-Footer {
+      }
+
+      &-Close {
+            position: absolute;
+            top: 0;
+            right: 5px;
+            cursor: none;
+            color: red;
+
+            @media only screen and (min-width: $small) {
+                  cursor: pointer;
+            }
+      }
+
+      @media only screen and (min-width: $small) {
+            width: auto;
+      }
+}
+
+.Backdrop {
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      z-index: 500;
+      background-color: $backdrop-bgclr;
+}
