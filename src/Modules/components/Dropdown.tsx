@@ -1,16 +1,16 @@
-import React from 'react'
-import { NextPage } from 'next';
-import Head from 'next/head'
-import Template from '../../Components/Template/index';
+import React, { Fragment } from "react";
+import { NextPage } from "next";
+import Head from "next/head";
+import Template from "../../Components/Template/index";
 
 interface Props {
-    Components: any
+    Components: any;
 }
 
 export const Dropdown: NextPage<Props> = ({ Components }) => {
     const comp = Components[0];
     return (
-        <>
+        <Fragment>
             <Head>
                 <title>{`${comp.Name} | react-raw`}</title>
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
@@ -20,9 +20,8 @@ export const Dropdown: NextPage<Props> = ({ Components }) => {
                 src={comp.src}
                 styles={comp.styles}
                 usage={comp.usage}
-                documentation={comp.documentation} />
-        </>
-    )
-}
-
-
+                documentation={comp.documentation}
+            />
+        </Fragment>
+    );
+};
