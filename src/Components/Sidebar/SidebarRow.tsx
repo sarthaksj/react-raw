@@ -8,7 +8,8 @@ interface Props {
 }
 
 const SidebarRow: React.FunctionComponent<Props> = ({ type, name }) => {
-    const link = `/${type}/${name}`.toLowerCase();
+    const link = `/components/${name}`;
+
     return (
         <Link href={link}>
             <a className={classes.Sidebar__row}>

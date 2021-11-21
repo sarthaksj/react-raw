@@ -1,6 +1,6 @@
 import React from 'react'
 import SidebarRow from './SidebarRow';
-import { Components } from '../../raw-components';
+import { Components } from '../../components-docs/List';
 import classes from '../../Stylesheets/layouts/_sidebar.module.scss';
 
 interface Props { }
@@ -12,9 +12,9 @@ const index: React.FunctionComponent<Props> = ({ }) => {
                 Components.map((row) => {
                     return (
                         <SidebarRow
-                            key={row.Name}
+                            key={row.name}
                             type="components"
-                            name={row.Name}>
+                            name={row.name}>
                         </SidebarRow>
                     )
                 })

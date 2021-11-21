@@ -1,0 +1,33 @@
+$small: 40em;
+
+.Toast {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      padding: 0.5rem;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      bottom: 2%;
+      width: 350px;
+      border-radius: 5px;
+      box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+            rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+      background-color: hsl(145, 100%, 39%);
+
+      &-Close {
+            position: absolute;
+            top: 0;
+            right: 5px;
+            cursor: pointer;
+            color: white;
+      }
+
+      &.active {
+            display: block;
+      }
+
+      @media only screen and (min-width: $small) {
+            width: 365px;
+            bottom: 0;
+      }
+}

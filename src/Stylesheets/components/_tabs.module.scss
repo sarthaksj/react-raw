@@ -1,0 +1,24 @@
+.Tabs {
+      border-right: solid gray;
+      border-left: none;
+      border-top: none;
+      border-bottom: none;
+      min-width: 150px;
+      background-color: hsl(214, 31%, 20%);
+      color: white;
+      cursor: pointer;
+      height: 33px;
+      border-width: 2px;
+      margin-bottom: 3px;
+
+      &:hover {
+            background-color: hsl(214, 31%, 24%);
+      }
+}
+
+.Tabs.active {
+      border-top-right-radius: 10px;
+      background-color: hsla(0, 0%, 100%, 0);
+      //   box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset;
+      box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}

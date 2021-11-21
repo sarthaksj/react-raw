@@ -1,0 +1,30 @@
+.Dropdown {
+      position: relative;
+      margin: 1rem;
+
+      &__menu {
+            position: absolute;
+            left: 0;
+            top: calc(100% + 0.2rem);
+            background-color: white;
+            padding: 0.75rem;
+            border-radius: 0.25rem;
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+                  rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(-10px);
+            transition: opacity 100ms ease-in-out, transform 100ms ease-in-out;
+      }
+
+      &.active > &__btn + &__menu {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+      }
+
+      &.active > &__btn,
+      &__btn:hover {
+            color: black;
+      }
+}
