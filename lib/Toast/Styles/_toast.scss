@@ -1,3 +1,5 @@
+@use "../../../Stylesheets/abstracts/mixins" as *;
+
 $small: 40em;
 
 .Toast {
@@ -31,3 +33,6 @@ $small: 40em;
             bottom: 0;
       }
 }
+
+// will-change: transform;
+// transition: all 0.3s linear;

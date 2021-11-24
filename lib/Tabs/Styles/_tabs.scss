@@ -1,0 +1,76 @@
+$properties: (
+      // center, right, full
+      alignment: "full"
+);
+
+.tabs {
+      display: flex;
+      align-items: stretch;
+      font-size: 1.25rem;
+      justify-content: space-between;
+      overflow: hidden;
+      overflow-x: auto;
+      white-space: nowrap;
+
+      ul {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            flex-grow: 1;
+            flex-shrink: 0;
+            border-bottom-color: #dbdbdb;
+            border-bottom-style: solid;
+            border-bottom-width: 1px;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+
+            @if map-get($properties, alignment) == "center" {
+                  & {
+                        justify-content: center;
+                  }
+            } @else if map-get($properties, alignment) == "right" {
+                  & {
+                        justify-content: flex-end;
+                  }
+            }
+      }
+
+      li {
+            display: block;
+
+            &.is-active {
+                  a {
+                        background-color: #fff;
+                        border-color: #dbdbdb;
+                        border-bottom-color: transparent;
+                        color: #485fc7;
+                  }
+            }
+
+            @if map-get($properties, alignment) == "full" {
+                  & {
+                        flex-grow: 1;
+                        flex-shrink: 0;
+                  }
+            }
+      }
+      a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #4a4a4a;
+            margin-bottom: -1px;
+            padding: 0.5em 1em;
+            vertical-align: top;
+            text-decoration: none;
+            cursor: pointer;
+            border: 1px solid transparent;
+            border-radius: 0.375em 0.375em 0 0;
+
+            &:hover {
+                  background-color: #f5f5f5;
+                  border-bottom-color: #dbdbdb;
+            }
+      }
+}

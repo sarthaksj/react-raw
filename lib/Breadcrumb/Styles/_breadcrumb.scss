@@ -1,0 +1,82 @@
+$properties: (
+      size: 1.2rem,
+      position: "",
+      clr: #485fc7,
+      separator: (
+            type: "",
+            clr: #b5b5b5,
+      ),
+);
+
+.breadcrumb {
+      font-size: map-get($properties, size);
+      white-space: nowrap;
+
+      a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: map-get($properties, clr);
+            padding: 0 0.75em;
+            text-decoration: none;
+
+            &:hover {
+                  color: hsl(0, 0%, 21%);
+            }
+      }
+
+      li {
+            display: flex;
+            align-items: center;
+
+            &:first-child a {
+                  padding-left: 0;
+            }
+
+            &.is-active {
+                  a {
+                        color: #363636;
+                        cursor: default;
+                        pointer-events: none;
+                  }
+            }
+
+            & + li::before {
+                  color: map-get($properties, separator, clr);
+                  content: "\0002f";
+            }
+      }
+      ul,
+      ol {
+            align-items: flex-start;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+      }
+
+      @if map-get($properties, position) == "center" {
+            ol,
+            ul {
+                  justify-content: center;
+            }
+      } @else if map-get($properties, position) == "right" {
+            ol,
+            ul {
+                  justify-content: flex-end;
+            }
+      }
+
+      @if map-get($properties, separator, type) == "arrow" {
+            li + li::before {
+                  content: "\02192";
+            }
+      } @else if map-get($properties, separator, type) == "bullet" {
+            li + li::before {
+                  content: "\02022";
+            }
+      } @else if map-get($properties, separator, type) == "dot" {
+            li + li::before {
+                  content: "\000b7";
+            }
+      } // https://www.w3schools.com/cssref/css_entities.asp
+}
