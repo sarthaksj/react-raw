@@ -1,24 +1,84 @@
-.Tabs {
-      border-right: solid gray;
-      border-left: none;
-      border-top: none;
-      border-bottom: none;
-      min-width: 150px;
-      background-color: hsl(214, 31%, 20%);
-      color: white;
-      cursor: pointer;
-      height: 33px;
-      border-width: 2px;
-      margin-bottom: 3px;
+$properties: (
+      // center, right, full
+      alignment: ""
+);
 
-      &:hover {
-            background-color: hsl(214, 31%, 24%);
+.tabs {
+      display: flex;
+      align-items: stretch;
+      font-size: 0.9rem;
+      justify-content: space-between;
+      overflow: hidden;
+      overflow-x: auto;
+      white-space: nowrap;
+
+      ul {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            flex-grow: 1;
+            flex-shrink: 0;
+            border-bottom-color: gray;
+            border-bottom-style: solid;
+            border-bottom-width: 1.5px;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            background-color: #223143;
+
+            @if map-get($properties, alignment) == "center" {
+                  & {
+                        justify-content: center;
+                  }
+            } @else if map-get($properties, alignment) == "right" {
+                  & {
+                        justify-content: flex-end;
+                  }
+            }
       }
-}
 
-.Tabs.active {
-      border-top-right-radius: 10px;
-      background-color: hsla(0, 0%, 100%, 0);
-      //   box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset;
-      box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+      li {
+            display: block;
+
+            &.isActive {
+                  a {
+                        background-color: #fff;
+                        border-color: gray;
+                        border-bottom-color: transparent;
+                        color: #223143;
+                  }
+            }
+
+            @if map-get($properties, alignment) == "full" {
+                  & {
+                        flex-grow: 1;
+                        flex-shrink: 0;
+                  }
+            }
+      }
+      a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: -1px;
+            padding: 0.5em 1em;
+            font-size: 1.05em;
+            vertical-align: top;
+            text-decoration: none;
+            cursor: pointer;
+            border: 1px solid transparent;
+            border-radius: 0.375em 0.375em 0 0;
+
+            &:hover {
+                  background-color: #f5f5f5;
+                  border-bottom-color: #dbdbdb;
+                  color: #223143;
+            }
+      }
+
+      .icon {
+            font-size: 1.1em;
+            margin-right: 0.5em;
+            color: #ffba08;
+      }
 }

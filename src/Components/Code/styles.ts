@@ -1,12 +1,13 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.div`
-      box-shadow: 0px 3px 5px -1px rgb(0 0 0 / 20%),
-            0px 6px 10px 0px rgb(0 0 0 / 14%), 0px 1px 18px 0px rgb(0 0 0 / 12%);
-      background-color: #ffffff20;
+      box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
+            rgba(0, 0, 0, 0.22) 0px 15px 12px;
+      border-radius: 5px;s
 `;
 
 export const Pre = styled.pre`
+      background-color: #ffffff20;
       text-align: left;
       margin: 0;
       font-size: 1rem;
@@ -14,10 +15,7 @@ export const Pre = styled.pre`
       padding: 0.5em;
       min-height: 550px;
       max-height: 550px;
-      border-top-left-radius: 0px;
-      border-top-right-radius: 0px;
-      border-bottom-left-radius: 5px;
-      border-bottom-right-radius: 5px;
+      border-radius: 5px;
 
       &::-webkit-scrollbar {
             display: none;
@@ -43,4 +41,5 @@ export const LineNo = styled.span`
 
 export const LineContent = styled.span`
       display: table-cell;
+      white-space: pre-wrap;
 `;

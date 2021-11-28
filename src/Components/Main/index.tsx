@@ -14,7 +14,9 @@ interface Props { }
 
 const index: React.FunctionComponent<Props> = ({ }) => {
     return (
+
         <Fragment>
+
             <Head>
                 <title>{`${HEADER_TITLE}`}</title>
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />

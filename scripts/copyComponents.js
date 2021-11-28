@@ -1,75 +1,21 @@
-var path = require("path");
-var fs = require("fs");
+const path = require("path");
+const fs = require("fs");
 
+const COMPONENTS_DIR = path.resolve("./lib");
+const DEMOS_DIR = path.resolve("./src/components-docs");
+const OUTPUT_DIR = path.resolve("./generated");
 
-const componentsDir = path.resolve("./lib");
-const outputDir = path.resolve("./react-raw/generated");
-
-createDirIfNeeded(outputDir);
-createDirIfNeeded(`${outputDir}/components/`);
-createDirIfNeeded(`${outputDir}/styles/`);
-createDirIfNeeded(`${outputDir}/componentDemos/`);
-
-
-// Copy Component as markdown files
-readDir(componentsDir, "COMPONENT");
-// Copy Component Styles as markdown files
-readDir(componentsDir, "STYLE");
-// Copy Component Demo  as markdown files
-readDir(componentsDir, "DEMO");
-
-
-
-function readDir(dir, fileType) {
-      fs.readdir(dir, (err, files) => {
-            if (err) throw err;
-            files.forEach((file) => {
-                  copyHook({
-                        sourceFile: pathDefinition("SOURCE", fileType, file),
-                        destFile: pathDefinition("DEST", fileType, file),
-                  });
-            });
-      });
-}
-
-function pathDefinition(pathType, fileType, fileName) {
-      if (pathType === "SOURCE") {
-            const commonPath = path.resolve(`${componentsDir}/${fileName}`);
-            switch (fileType) {
-                  case "COMPONENT":
-                        return path.resolve(`${commonPath}/index.js`);
-                  case "DEMO":
-                        return path.resolve(`${commonPath}/${fileName}.demo.js`);
-                  case "STYLE":
-                        return path.resolve(
-                              `${commonPath}/Styles/_${fileName.toLowerCase()}.scss`
-                        );
-            }
-      } else if ("DEST") {
-            switch (fileType) {
-                  case "COMPONENT":
-                        return path.resolve(`${outputDir}/components/${fileName}.component.md`);
-                  case "DEMO":
-                        return path.resolve(`${outputDir}/componentDemos/${fileName}.demo.md`);
-                  case "STYLE":
-                        return path.resolve(
-                              `${outputDir}/styles/${fileName}.style.md`
-                        );
-            }
-      }
-};
-
-function getFileName(pathname) {
-      return pathname.split("/").reverse()[0];
-}
-
-function createDirIfNeeded(dir) {
+const createDirIfNeeded = (dir) => {
       if (!fs.existsSync(path.resolve(dir))) {
             fs.mkdirSync(dir);
       }
-}
+};
 
-function copyHook({ sourceFile, destFile, useSandbox }) {
+const getFileName = (pathname) => {
+      return pathname.split("/").reverse()[0];
+};
+
+const copyData = ({ sourceFile, destFile }) => {
       // Check source file
       if (!fs.existsSync(sourceFile)) {
             console.log(`${getFileName(sourceFile)} doesn't exist`);
@@ -106,4 +52,113 @@ function copyHook({ sourceFile, destFile, useSandbox }) {
                   `${getFileName(destFile)} ${existingFile ? "updated" : "created"}`
             );
       });
-}
+};
+
+const copyComponent = (__dir) => {
+      createDirIfNeeded(`${OUTPUT_DIR}/components`);
+
+      fs.readdir(__dir, (err, dirs) => {
+            if (err) throw err;
+            dirs.map((dir) => {
+                  createDirIfNeeded(`${OUTPUT_DIR}/components/${dir}`);
+                  fs.readdir(path.resolve(`${__dir}/${dir}`), (err, files) => {
+                        if (err) throw err;
+                        files.map((file) => {
+                              console.log(file);
+                              if (file === "index.js") {
+                                    copyData({
+                                          sourceFile: path.resolve(`${__dir}/${dir}/index.js`),
+                                          destFile: path.resolve(
+                                                `${OUTPUT_DIR}/components/${dir}/index.md`
+                                          ),
+                                    });
+                              }
+                              if (file === "Components") {
+                                    createDirIfNeeded(`${OUTPUT_DIR}/components/${dir}/components`);
+                                    fs.readdir(
+                                          path.resolve(`${__dir}/${dir}/Components`),
+                                          (err, files) => {
+                                                files.map((file) => {
+                                                      copyData({
+                                                            sourceFile: path.resolve(
+                                                                  `${__dir}/${dir}/Components/${file}`
+                                                            ),
+                                                            destFile: path.resolve(
+                                                                  `${OUTPUT_DIR}/components/${dir}/components/${file.replace(
+                                                                        ".js",
+                                                                        ""
+                                                                  )}.md`
+                                                            ),
+                                                      });
+                                                });
+                                          }
+                                    );
+                              }
+                        });
+                  });
+            });
+      });
+};
+
+const copyDemoJs = (__dir) => {
+      createDirIfNeeded(`${OUTPUT_DIR}/componentDemos`);
+      const cmnPath = path.resolve(`${__dir}/JavaScript`);
+      fs.readdir(cmnPath, (err, files) => {
+            if (err) throw err;
+            files.forEach((file) => {
+                  copyData({
+                        sourceFile: path.resolve(
+                              `${cmnPath}/${file}/${file.toLowerCase()}.demo.js`
+                        ),
+                        destFile: path.resolve(`${OUTPUT_DIR}/componentDemos/${file}.demo.md`),
+                  });
+            });
+      });
+};
+
+const copyStylesScss = (__dir) => {
+      createDirIfNeeded(`${OUTPUT_DIR}/styles`);
+      fs.readdir(__dir, (err, files) => {
+            if (err) throw err;
+            files.forEach((file) => {
+                  copyData({
+                        sourceFile: path.resolve(
+                              `${__dir}/${file}/Styles/_${file.toLowerCase()}.scss`
+                        ),
+                        destFile: path.resolve(`${OUTPUT_DIR}/styles/${file}.style.md`),
+                  });
+            });
+      });
+};
+
+createDirIfNeeded(OUTPUT_DIR);
+copyComponent(COMPONENTS_DIR);
+copyStylesScss(COMPONENTS_DIR);
+copyDemoJs(DEMOS_DIR);
+
+// function pathDefinition(pathType, fileType, fileName) {
+//       if (pathType === "SOURCE") {
+//             const commonPath = path.resolve(`${COMPONENTS_DIR}/${fileName}`);
+//             switch (fileType) {
+//                   case "COMPONENT":
+//                         return path.resolve(`${commonPath}/index.js`);
+//                   case "DEMO":
+//                         return path.resolve(`${commonPath}/${fileName}.demo.js`);
+//                   case "STYLE":
+//                         return path.resolve(
+//                               `${commonPath}/Styles/_${fileName.toLowerCase()}.scss`
+//                         );
+//             }
+//       } else if ("DEST") {
+//             switch (fileType) {
+//                   case "COMPONENT":
+//                         return path.resolve(`${outputDir}/components/${fileName}.component.md`);
+//                   case "DEMO":
+//                         return path.resolve(`${outputDir}/componentDemos/${fileName}.demo.md`);
+//                   case "STYLE":
+//                         return path.resolve(
+//                               `${outputDir}/styles/${fileName}.style.md`
+//                         );
+//             }
+//       }
+// };

@@ -1,4 +1,6 @@
 import React from 'react';
+import { MDXProvider } from '@mdx-js/react';
+import { mdxComponents } from '../Components/MdxRenderer/mdxRenderer';
 import Layout from '../Components/Layout';
 import Header from '../Components/Header';
 import Sidebar from '../Components/Sidebar';
@@ -20,7 +22,11 @@ export default function MyApp({ Component, pageProps }: AppProps) {
     },
 
     main: {
-      component: <Component {...pageProps} />
+      component: (
+        // <MDXProvider components={mdxComponents}>
+        <Component {...pageProps} />
+        // </MDXProvider>
+      )
     },
   }
   return (
