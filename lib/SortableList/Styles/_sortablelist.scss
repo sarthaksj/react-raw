@@ -1,0 +1,39 @@
+.Sortable-List {
+      width: 50%;
+      margin: auto;
+      border: 2px solid #e3e5e4;
+      padding: 0;
+      list-style: none;
+
+      & li {
+            display: flex;
+            background-color: white;
+
+            &:not(:last-of-type) {
+                  border-bottom: 2px solid #e3e5e4;
+            }
+
+            &.dragging {
+                  opacity: 0.5;
+            }
+
+            & > span {
+                  background-color: #c3c7ca;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  font-size: 20px;
+                  height: 60px;
+                  width: 60px;
+            }
+
+            & > div {
+                  cursor: pointer;
+                  display: flex;
+                  align-items: center;
+                  justify-content: space-between;
+                  padding: 15px;
+                  flex: 1;
+            }
+      }
+}

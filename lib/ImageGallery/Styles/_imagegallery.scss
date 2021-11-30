@@ -1,0 +1,30 @@
+.Image-Gallery {
+      max-width: 760px;
+      margin: auto;
+      padding: 10px;
+      background: white;
+
+      & > div:first-child,
+      div:nth-child(2) {
+            width: 100%;
+      }
+
+      & > div:nth-child(2) {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            padding-top: 10px;
+            grid-gap: 0.5px 10px;
+            grid-auto-rows: 10px;
+
+            & > img {
+                  cursor: pointer;
+
+                  &.is-active {
+                        opacity: 0.5;
+                  }
+            }
+      }
+}
+
+// grid-template-columns: repeat(4, 1fr);
+// grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
